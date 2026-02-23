@@ -9,9 +9,9 @@ author: paras25619@gmail.com
 
 # Description
 description: |
-  An AI-powered meme generation skill that combines browser automation with intelligent 
-  template selection to create customized memes based on text prompts. This skill uses 
-  advanced web scraping techniques to interact with meme generation platforms, select 
+  An AI-powered meme generation skill that combines browser automation with intelligent
+  template selection to create customized memes based on text prompts. This skill uses
+  advanced web scraping techniques to interact with meme generation platforms, select
   appropriate templates, and generate contextually relevant memes with witty captions.
 
 # Tags and Modes
@@ -126,14 +126,14 @@ allowed_tools:
 # Rich Documentation
 documentation:
   overview: |
-    This meme generation skill specializes in creating contextually relevant, humorous memes 
-    using advanced browser automation. It intelligently selects appropriate meme templates 
-    based on the input prompt, crafts witty captions, and generates high-quality memes through 
+    This meme generation skill specializes in creating contextually relevant, humorous memes
+    using advanced browser automation. It intelligently selects appropriate meme templates
+    based on the input prompt, crafts witty captions, and generates high-quality memes through
     direct interaction with meme generation platforms.
 
-    The skill excels at understanding context, selecting the perfect template, and creating 
-    captions that resonate with the intended humor or message. It uses sophisticated AI to 
-    analyze the prompt, match it with suitable templates, and generate memes that are both 
+    The skill excels at understanding context, selecting the perfect template, and creating
+    captions that resonate with the intended humor or message. It uses sophisticated AI to
+    analyze the prompt, match it with suitable templates, and generate memes that are both
     visually appealing and contextually accurate.
 
   use_cases:

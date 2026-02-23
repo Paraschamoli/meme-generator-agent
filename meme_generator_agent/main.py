@@ -2,6 +2,7 @@
 
 # Disable Browser Use telemetry immediately to prevent PostHog errors
 import os
+
 os.environ["ANONYMIZED_TELEMETRY"] = "false"
 os.environ["BROWSER_USE_TELEMETRY"] = "false"
 
@@ -13,13 +14,13 @@ import sys
 import traceback
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 from bindu.penguin.bindufy import bindufy
 from browser_use import Agent as BrowserAgent
 from browser_use.llm.openai.chat import ChatOpenAI
-
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # Global instances
@@ -31,6 +32,7 @@ _init_lock = asyncio.Lock()
 @dataclass
 class AgentResponse:
     """Mock response class to match Agno's RunResponse structure."""
+
     content: str
     run_id: Optional[str] = None
     status: str = "COMPLETED"
@@ -61,7 +63,7 @@ def load_config() -> dict:
             "url": "http://127.0.0.1:3773",
             "expose": True,
             "protocol_version": "1.0.0",
-        }
+        },
     }
 
 
@@ -75,7 +77,7 @@ async def initialize_agent() -> None:
     if not api_key:
         api_key = os.getenv("OPENROUTER_API_KEY")
         if api_key:
-             base_url = "https://openrouter.ai/api/v1" 
+            base_url = "https://openrouter.ai/api/v1"
 
     if not api_key:
         # Fallback for local testing if env vars aren't set
@@ -84,12 +86,7 @@ async def initialize_agent() -> None:
     model_name = os.getenv("MODEL_NAME", "gpt-4o")
 
     if api_key:
-        llm = ChatOpenAI(
-            model=model_name,
-            api_key=api_key,
-            base_url=base_url,
-            temperature=0.0
-        )
+        llm = ChatOpenAI(model=model_name, api_key=api_key, base_url=base_url, temperature=0.0)
         print(f"✅ Agent initialized with model: {model_name}")
     else:
         print("❌ Failed to initialize LLM: Missing API Key")
@@ -109,7 +106,7 @@ async def generate_meme(query: str) -> str:
         "2. Click on the Search bar in the middle and search for ONLY ONE MAIN ACTION VERB (like 'bully', 'laugh', 'cry') in this query: '{0}'\n"
         "3. Choose any meme template that metaphorically fits the meme topic: '{0}'\n"
         "   by clicking on the 'Add Caption' button below it\n"
-        "4. Write a Top Text (setup/context) and Bottom Text (punchline/outcome) related to '{0}'.\n" 
+        "4. Write a Top Text (setup/context) and Bottom Text (punchline/outcome) related to '{0}'.\n"
         "5. Check the preview making sure it is funny and a meaningful meme. Adjust text directly if needed. \n"
         "6. Look at the meme and text on it, if it doesnt make sense, PLEASE retry by filling the text boxes with different text. \n"
         "7. Click on the Generate meme button to generate the meme\n"
@@ -121,13 +118,13 @@ async def generate_meme(query: str) -> str:
         llm=llm,
         max_actions_per_step=15,  # Increased steps for safety
         max_failures=3,
-        use_vision=True 
+        use_vision=True,
     )
 
     try:
         history = await agent.run()
         final_result = history.final_result()
-        
+
         print(f"📄 Raw Agent Result: {final_result}")
 
         if not final_result:
@@ -135,22 +132,22 @@ async def generate_meme(query: str) -> str:
 
         # Extract meme URL
         # Pattern matches https://imgflip.com/i/ followed by alphanumeric chars
-        url_match = re.search(r'https://imgflip\.com/i/([a-zA-Z0-9]+)', final_result)
-        
+        url_match = re.search(r"https://imgflip\.com/i/([a-zA-Z0-9]+)", final_result)
+
         if url_match:
             meme_id = url_match.group(1)
             # Markdown image syntax for UI rendering
             image_url = f"https://i.imgflip.com/{meme_id}.jpg"
             return f"### Here is your meme:\n\n![Generated Meme]({image_url})\n\n[View on ImgFlip](https://imgflip.com/i/{meme_id})"
-        
+
         # Fallback: Check if there's any HTTP link
-        http_match = re.search(r'(https?://[^\s]+)', final_result)
+        http_match = re.search(r"(https?://[^\s]+)", final_result)
         if http_match:
-             link = http_match.group(1)
-             return f"I generated a meme, but couldn't confirm the image format. Link: {link}"
-             
+            link = http_match.group(1)
+            return f"I generated a meme, but couldn't confirm the image format. Link: {link}"
+
         return f"I finished the task, but here is what I found: {final_result}"
-        
+
     except Exception as e:
         traceback.print_exc()
         return f"Error generating meme: {str(e)}"
@@ -175,7 +172,7 @@ async def handler(messages: list[dict[str, str]]) -> AgentResponse:
 
     # Run the meme generation logic
     result_text = await generate_meme(user_query)
-    
+
     # Return response object with content attribute
     return AgentResponse(content=result_text)
 
@@ -185,7 +182,7 @@ def main():
     parser = argparse.ArgumentParser(description="Meme Generator Agent")
     parser.add_argument("--openai-api-key", type=str, help="OpenAI API key")
     parser.add_argument("--model", type=str, default="gpt-4o", help="Model name")
-    
+
     args = parser.parse_args()
 
     if args.openai_api_key:
@@ -194,7 +191,7 @@ def main():
         os.environ["MODEL_NAME"] = args.model
 
     print("🥸 Meme Generator Agent - Browser Use")
-    
+
     config = load_config()
 
     try:
