@@ -53,7 +53,7 @@ check: ## Run code quality tools
 	@echo "🚀 Linting code: Running pre-commit"
 	@uv run pre-commit run -a
 	@echo "🚀 Static type checking: Running ty"
-	@uv run ty .
+	@uv run ty check
 
 .PHONY: test
 test: ## Test the code with pytest
