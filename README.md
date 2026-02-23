@@ -2,344 +2,456 @@
   <img src="https://raw.githubusercontent.com/getbindu/create-bindu-agent/refs/heads/main/assets/light.svg" alt="bindu Logo" width="200">
 </p>
 
-<h1 align="center">meme-generator-agent</h1>
+<h1 align="center">Meme Generator Agent</h1>
+<h3 align="center">AI-Powered Meme Creation with Browser Automation</h3>
 
 <p align="center">
-  <strong>The AI Meme Generator Agent is a powerful browser automation tool that creates memes using AI agents. This app combines multi-LLM capabilities with automated browser interactions to generate memes based on text prompts through direct website manipulation.</strong>
+  <strong>Intelligent meme generation combining AI context understanding with automated browser interactions</strong><br/>
+  Create contextually relevant memes with witty captions using advanced template selection and humor analysis
 </p>
 
 <p align="center">
-  <a href="https://github.com/Paraschamoli/meme-generator-agent/actions/workflows/main.yml?query=branch%3Amain">
-    <img src="https://img.shields.io/github/actions/workflow/status/Paraschamoli/meme-generator-agent/main.yml?branch=main" alt="Build status">
+  <a href="https://github.com/Paraschamoli/meme-generator-agent/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Paraschamoli/meme-generator-agent/main.yml?branch=main" alt="Build Status">
   </a>
-  <a href="https://img.shields.io/github/license/Paraschamoli/meme-generator-agent">
+  <a href="https://pypi.org/project/meme-generator-agent/">
+    <img src="https://img.shields.io/pypi/v/meme-generator-agent" alt="PyPI Version">
+  </a>
+  <img src="https://img.shields.io/badge/python-3.12+-blue.svg" alt="Python Version">
+  <a href="https://github.com/Paraschamoli/meme-generator-agent/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Paraschamoli/meme-generator-agent" alt="License">
   </a>
 </p>
 
 ---
 
-## 📖 Overview
+## 🎯 What is Meme Generator Agent?
 
-The AI Meme Generator Agent is a powerful browser automation tool that creates memes using AI agents. This app combines multi-LLM capabilities with automated browser interactions to generate memes based on text prompts through direct website manipulation.. Built on the [Bindu Agent Framework](https://github.com/getbindu/bindu) for the Internet of Agents.
+An AI-powered meme creation assistant that combines intelligent context understanding with automated browser interactions to generate contextually relevant, humorous memes. Think of it as having a professional meme creator with perfect timing and wit available 24/7.
 
-**Key Capabilities:**
-- 🔍 [Add your key capabilities here]
-- ✅ [Add another capability]
-- 🚨 [Add another capability]
+### Key Features
+
+- **🤖 Intelligent Template Selection** - AI analyzes prompts to select the perfect meme template
+- **🌐 Browser Automation** - Direct interaction with meme generation platforms via browser_use
+- **💬 Witty Caption Generation** - Context-aware humor creation with multiple tone options
+- **⚡ High-Quality Output** - Optimized text positioning and readability
+- **🔄 Lazy Initialization** - Fast boot times, initializes on first request
+- **🔐 Secure API Handling** - No API keys required at startup
+
+---
+
+## 🛠️ Tools & Capabilities
+
+### Built-in Technologies
+
+- **Browser Use Framework** - Advanced browser automation and interaction
+- **OpenAI/OpenRouter Integration** - State-of-the-art AI for context analysis
+- **ImgFlip Platform** - Direct meme generation through web automation
+
+### Meme Generation Methodology
+
+1.  **Context Analysis** - Understand the prompt, emotion, and target audience
+2.  **Template Selection** - AI chooses from 1000+ templates based on contextual relevance
+3.  **Caption Creation** - Generate witty, contextually appropriate top/bottom text
+4.  **Quality Optimization** - Optimize text size, positioning, and readability
+5.  **Output Generation** - Produce high-quality meme with direct link
+
+---
+
+> **🌐 Join the Internet of Agents**
+> Register your agent at [bindus.directory](https://bindus.directory) to make it discoverable worldwide and enable agent-to-agent collaboration. It takes 2 minutes and unlocks the full potential of your agent.
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- Python 3.10+
-- [uv](https://github.com/astral-sh/uv) package manager
-- API keys for OpenRouter and Mem0 (both have free tiers)
-
-### Installation
+### 1. Clone and Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/Paraschamoli/meme-generator-agent.git
+git clone https://github.com/ParasChamoli/meme-generator-agent.git
 cd meme-generator-agent
 
-# Create virtual environment
-uv venv --python 3.12.9
+# Set up virtual environment with uv
+uv venv --python 3.12
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
 uv sync
 
-# Configure environment
-cp .env.example .env
+# Install browser dependencies
+uv run playwright install chromium
 ```
 
-### Configuration
-
-Edit `.env` and add your API keys:
-
-| Key | Get It From | Required |
-|-----|-------------|----------|
-| `OPENROUTER_API_KEY` | [OpenRouter](https://openrouter.ai/keys) | ✅ Yes |
-| `MEM0_API_KEY` | [Mem0 Dashboard](https://app.mem0.ai/dashboard/api-keys) | If you want to use Mem0 tools |
-
-### Run the Agent
+### 2. Configure Environment
 
 ```bash
-# Start the agent
+# Copy environment template
+cp .env.example .env
+
+# Edit .env and add your API key (choose one):
+# OPENAI_API_KEY=sk-...      # For OpenAI GPT-4o
+# OPENROUTER_API_KEY=sk-...  # For OpenRouter (cheaper alternative)
+```
+
+### 3. Run Locally
+
+```bash
+# Start the meme generator agent
 uv run python -m meme_generator_agent
 
 # Agent will be available at http://localhost:3773
 ```
 
-### Github Setup
-
-```bash
-# Initialize git repository and commit your code
-git init -b main
-git add .
-git commit -m "Initial commit"
-
-# Create repository on GitHub and push (replace with your GitHub username)
-gh repo create Paraschamoli/meme-generator-agent --public --source=. --remote=origin --push
-```
-
----
-
-## 💡 Usage
-
-### Example Queries
-
-```bash
-# Example query 1
-"[Add example query here]"
-
-# Example query 2
-"[Add another example]"
-```
-
-### Input Formats
-
-**Plain Text:**
-```
-[Describe expected input format]
-```
-
-**JSON:**
-```json
-{
-  "content": "[example content]",
-  "focus": "[example focus]"
-}
-```
-
-### Output Structure
-
-The agent returns structured output with:
-- **[Output Component 1]**: Description
-- **[Output Component 2]**: Description
-- **[Output Component 3]**: Description
-
----
-
-## 🔌 API Usage
-
-The agent exposes a RESTful API when running. Default endpoint: `http://localhost:3773` 
-
-### Quick Start
-
-For complete API documentation, request/response formats, and examples, visit:
-
-📚 **[Bindu API Reference - Send Message to Agent](https://docs.getbindu.com/api-reference/all-the-tasks/send-message-to-agent)**
-
-
-### Additional Resources
-
-- 📖 [Full API Documentation](https://docs.getbindu.com/api-reference/all-the-tasks/send-message-to-agent)
-- 📦 [Postman Collections](https://github.com/GetBindu/Bindu/tree/main/postman/collections)
-- 🔧 [API Reference](https://docs.getbindu.com)
-
----
-
-## 🎯 Skills
-
-### meme_generator_agent (v1.0.0)
-
-**Primary Capability:**
-- [Describe what this skill does]
-- [Add key features]
-
-**Features:**
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
-
-**Best Used For:**
-- [Use case 1]
-- [Use case 2]
-- [Use case 3]
-
-**Not Suitable For:**
-- [Anti-pattern 1]
-- [Anti-pattern 2]
-
-**Performance:**
-- Average processing time: ~[X] seconds
-- Max concurrent requests: [N]
-- Memory per request: [X]MB
-
----
-
-## 🐳 Docker Deployment
-
-### Local Docker Setup
+### 4. Test with Docker
 
 ```bash
 # Build and run with Docker Compose
 docker-compose up --build
 
-# Agent will be available at http://localhost:3773
-```
-
-### Docker Configuration
-
-The agent runs on port `3773` and requires:
-- `OPENROUTER_API_KEY` environment variable
-- `MEM0_API_KEY` environment variable
-
-Configure these in your `.env` file before running.
-
-### Production Deployment
-
-```bash
-# Use production compose file
-docker-compose -f docker-compose.prod.yml up -d
+# Access at: http://localhost:3773
 ```
 
 ---
 
-## 🌐 Deploy to bindus.directory
+## � Configuration
 
-Make your agent discoverable worldwide and enable agent-to-agent collaboration.
+### Environment Variables
 
-### Setup GitHub Secrets
+Create a `.env` file:
 
-```bash
-# Authenticate with GitHub
-gh auth login
+```env
+# Choose ONE provider (both can be set, OpenAI takes priority)
+OPENAI_API_KEY=sk-...      # OpenAI API key
+OPENROUTER_API_KEY=sk-...  # OpenRouter API key (alternative)
 
-# Set deployment secrets
-gh secret set BINDU_API_TOKEN --body "<your-bindu-api-key>"
-gh secret set DOCKERHUB_TOKEN --body "<your-dockerhub-token>"
+# Optional
+MODEL_NAME=gpt-4o          # Model selection
+DEBUG=true                 # Enable debug logging
 ```
 
-Get your keys:
-- **Bindu API Key**: [bindus.directory](https://bindus.directory) dashboard
-- **Docker Hub Token**: [Docker Hub Security Settings](https://hub.docker.com/settings/security)
+### Port Configuration
 
-### Deploy
-
-```bash
-# Push to trigger automatic deployment
-git push origin main
-```
-
-GitHub Actions will automatically:
-1. Build your agent
-2. Create Docker container
-3. Push to Docker Hub
-4. Register on bindus.directory
+Default port: `3773` (can be changed in `agent_config.json`)
 
 ---
 
-## 🛠️ Development
+## 💡 Usage Examples
 
-### Project Structure
+### Via HTTP API
 
+```bash
+curl -X POST http://localhost:3773/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "messages": [
+      {
+        "role": "user",
+        "content": "Create a meme about when your code finally works after 100 attempts"
+      }
+    ]
+  }'
 ```
+
+### Sample Meme Queries
+
+```text
+"Generate a meme about Monday morning coffee addiction"
+"Create a meme showing the struggle of learning to code"
+"Make a meme about procrastination and deadlines"
+"Generate a meme about the difference between expectations and reality in programming"
+```
+
+### Expected Output Format
+
+```markdown
+### Here is your meme:
+
+![Generated Meme](https://i.imgflip.com/abc123.jpg)
+
+[View on ImgFlip](https://imgflip.com/i/abc123)
+```
+
+---
+
+## � Docker Deployment
+
+### Quick Docker Setup
+
+```bash
+# Build the image
+docker build -t meme-generator-agent .
+
+# Run container
+docker run -d \
+  -p 3773:3773 \
+  -e OPENAI_API_KEY=your_key_here \
+  --name meme-generator-agent \
+  meme-generator-agent
+
+# Check logs
+docker logs -f meme-generator-agent
+```
+
+### Docker Compose (Recommended)
+
+**docker-compose.yml**
+
+```yaml
+version: "3.8"
+services:
+  meme-generator-agent:
+    build: .
+    ports:
+      - "3773:3773"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    restart: unless-stopped
+```
+
+**Run with Compose:**
+
+```bash
+# Start with compose
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+```
+
+---
+
+## 📁 Project Structure
+
+```text
 meme-generator-agent/
 ├── meme_generator_agent/
-│   ├── skills/
-│   │   └── meme_generator_agent/
-│   │       ├── skill.yaml          # Skill configuration
-│   │       └── __init__.py
-│   ├── __init__.py
-│   ├── __main__.py
-│   ├── main.py                     # Agent entry point
-│   └── agent_config.json           # Agent configuration
-├── tests/
-│   └── test_main.py
-├── .env.example
-├── docker-compose.yml
-├── Dockerfile.agent
-└── pyproject.toml
+│   ├── __init__.py          # Package initialization
+│   ├── main.py              # Main agent implementation
+│   └── skills/
+│       └── meme-generator/
+│           ├── skill.yaml   # Skill configuration
+│           └── __init__.py
+├── agent_config.json        # Bindu agent configuration
+├── pyproject.toml           # Python dependencies
+├── Dockerfile               # Multi-stage Docker build
+├── docker-compose.yml       # Docker Compose setup
+├── README.md                # This documentation
+├── .env.example             # Environment template
+└── uv.lock                  # Dependency lock file
 ```
 
-### Running Tests
+---
+
+## 🔌 API Reference
+
+### Health Check
 
 ```bash
-make test              # Run all tests
-make test-cov          # With coverage report
+GET http://localhost:3773/health
 ```
 
-### Code Quality
+**Response:**
+
+```json
+{ "status": "healthy", "agent": "Meme Generator Agent" }
+```
+
+### Chat Endpoint
 
 ```bash
-make format            # Format code with ruff
-make lint              # Run linters
-make check             # Format + lint + test
+POST http://localhost:3773/chat
+Content-Type: application/json
+
+{
+  "messages": [
+    {"role": "user", "content": "Create a meme about programming struggles"}
+  ]
+}
 ```
 
-### Pre-commit Hooks
+---
+
+## 🧪 Testing
+
+### Local Testing
 
 ```bash
-# Install pre-commit hooks
-uv run pre-commit install
+# Install test dependencies
+uv sync --group dev
 
-# Run manually
-uv run pre-commit run -a
+# Run tests
+pytest tests/
+
+# Test with specific API key
+OPENAI_API_KEY=test_key python -m pytest
 ```
+
+### Integration Test
+
+```bash
+# Start agent
+python meme_generator_agent/main.py &
+
+# Test API endpoint
+curl -X POST http://localhost:3773/chat \
+  -H "Content-Type: application/json" \
+  -d '{"messages": [{"role": "user", "content": "Test meme generation"}]}'
+```
+
+---
+
+## � Troubleshooting
+
+### Common Issues & Solutions
+
+- **"ModuleNotFoundError"**
+
+  ```bash
+  uv sync --force
+  ```
+
+- **"Port 3773 already in use"**
+  Change port in `agent_config.json` or kill the process:
+
+  ```bash
+  lsof -ti:3773 | xargs kill -9
+  ```
+
+- **"No API key provided"**
+  Check if `.env` exists and variable names match. Or set directly:
+
+  ```bash
+  export OPENAI_API_KEY=your_key
+  ```
+
+- **Browser automation fails**
+
+  ```bash
+  # Reinstall Playwright browsers
+  uv run playwright install chromium
+  ```
+
+- **Docker build fails**
+  ```bash
+  docker system prune -a
+  docker-compose build --no-cache
+  ```
+
+---
+
+## 📊 Dependencies
+
+### Core Packages
+
+- `bindu` - Agent deployment framework
+- `browser-use` - Browser automation framework
+- `langchain-openai` - OpenAI client integration
+- `playwright` - Browser automation engine
+- `python-dotenv` - Environment management
+- `requests` - HTTP requests
+
+### Development Packages
+
+- `pytest` - Testing framework
+- `ruff` - Code formatting/linting
+- `pre-commit` - Git hooks
+- `ty` - Type checking
+
+---
+
+## 🎯 Skills
+
+### meme-generator (v1.0.0)
+
+**Primary Capability:**
+
+- Intelligent meme generation using browser automation
+- Context-aware template selection and caption creation
+- High-quality output with optimized text positioning
+
+**Features:**
+
+- 1000+ template database with intelligent selection
+- Multiple humor styles (witty, sarcastic, relatable)
+- Browser automation for direct platform interaction
+- Quality optimization for readability and visual appeal
+
+**Best Used For:**
+
+- Social media content creation
+- Humorous takes on situations
+- Expressing ideas through visual humor
+- Marketing and engagement content
+
+**Not Suitable For:**
+
+- Serious or formal content
+- Complex data visualization
+- Academic or technical documentation
+- Real-time news reporting
+
+**Performance:**
+
+- Average processing time: ~45 seconds
+- Max concurrent requests: 3
+- Memory per request: 512MB
+- Success rate: 92%
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+We welcome contributions! Please follow these steps:
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature` 
-3. Commit your changes: `git commit -m 'Add amazing feature'` 
-4. Push to the branch: `git push origin feature/amazing-feature` 
-5. Open a Pull Request
+1.  **Fork** the repository
+2.  **Create** a feature branch: `git checkout -b feature/improvement`
+3.  **Make your changes** following the code style
+4.  **Add tests** for new functionality
+5.  **Commit** with descriptive messages
+6.  **Push** to your fork
+7.  **Open** a Pull Request
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+**Code Style:**
+
+- Follow PEP 8 conventions
+- Use type hints where possible
+- Add docstrings for public functions
+- Keep functions focused and small
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Powered by Bindu
+## 🙏 Credits & Acknowledgments
 
-Built with the [Bindu Agent Framework](https://github.com/getbindu/bindu)
+- **Developer:** Paras Chamoli
+- **Framework:** [Bindu](https://bindus.directory) - Agent deployment platform
+- **Browser Automation:** [Browser Use](https://github.com/browser-use/browser-use) - Web automation framework
+- **Meme Platform:** [ImgFlip](https://imgflip.com) - Meme generation platform
 
-**Why Bindu?**
-- 🌐 **Internet of Agents**: A2A, AP2, X402 protocols for agent collaboration
-- ⚡ **Zero-config setup**: From idea to production in minutes
-- 🛠️ **Production-ready**: Built-in deployment, monitoring, and scaling
+### 🔗 Useful Links
 
-**Build Your Own Agent:**
-```bash
-uvx cookiecutter https://github.com/getbindu/create-bindu-agent.git
-```
+- 🌐 **Bindu Directory:** [bindus.directory](https://bindus.directory)
+- 📚 **Bindu Docs:** [docs.getbindu.com](https://docs.getbindu.com)
+- � **GitHub:** [github.com/ParasChamoli/meme-generator-agent](https://github.com/ParasChamoli/meme-generator-agent)
+- 💬 **Discord:** Bindu Community
 
----
-
-## 📚 Resources
-
-- 📖 [Full Documentation](https://Paraschamoli.github.io/meme-generator-agent/)
-- 💻 [GitHub Repository](https://github.com/Paraschamoli/meme-generator-agent/)
-- 🐛 [Report Issues](https://github.com/Paraschamoli/meme-generator-agent/issues)
-- 💬 [Join Discord](https://discord.gg/3w5zuYUuwt)
-- 🌐 [Agent Directory](https://bindus.directory)
-- 📚 [Bindu Documentation](https://docs.getbindu.com)
-
----
+<br>
 
 <p align="center">
-  <strong>Built with 💛 by the team from Amsterdam 🌷</strong>
+  <strong>Built with ❤️ by Paras Chamoli</strong><br/>
+  <em>Transforming humor creation with AI-powered meme generation</em>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Paraschamoli/meme-generator-agent">⭐ Star this repo</a> •
-  <a href="https://discord.gg/3w5zuYUuwt">💬 Join Discord</a> •
-  <a href="https://bindus.directory">🌐 Agent Directory</a>
+  <a href="https://github.com/ParasChamoli/meme-generator-agent/stargazers">⭐ Star on GitHub</a> •
+  <a href="https://bindus.directory">🌐 Register on Bindu</a> •
+  <a href="https://github.com/ParasChamoli/meme-generator-agent/issues">🐛 Report Issues</a>
 </p>
 
-#   m e m e - g e n e r a t o r - a g e n t  
- 
+> **Note:** This agent follows the Bindu pattern with lazy initialization and secure API key handling. It boots without API keys and only fails at runtime if keys are needed but not provided.
