@@ -1,7 +1,3 @@
-# Meme Generation Skill
-# AI-powered meme creation using browser automation and intelligent template selection
-
-# Basic Metadata
 id: meme-generator-v1
 name: meme-generator
 version: 1.0.0
@@ -9,21 +5,21 @@ author: paras25619@gmail.com
 
 # Description
 description: |
-  An AI-powered meme generation skill that combines browser automation with intelligent
-  template selection to create customized memes based on text prompts. This skill uses
-  advanced web scraping techniques to interact with meme generation platforms, select
-  appropriate templates, and generate contextually relevant memes with witty captions.
+  An AI-powered skill for generating contextually relevant, humorous memes.
+  Combines browser automation with intelligent template selection to create memes
+  from text prompts, including witty captions and optimized layout. Works with
+  platforms like ImgFlip and custom templates.
 
 # Tags and Modes
 tags:
   - meme-generation
   - browser-automation
-  - content-creation
   - humor
+  - content-creation
   - social-media
-  - image-generation
   - template-selection
   - caption-creation
+  - image-generation
 
 input_modes:
   - text/plain
@@ -40,47 +36,29 @@ examples:
   - "Generate a meme showing the struggle of learning to code"
   - "Make a meme about Monday morning coffee addiction"
   - "Create a meme about when your code finally works after 100 attempts"
-  - "Generate a meme about the difference between expectations and reality in programming"
+  - "Generate a meme about expectations vs reality in programming"
 
 # Detailed Capabilities
 capabilities_detail:
-  meme_creation:
+  primary_capability:
     supported: true
-    platforms:
-      - imgflip.com
-      - custom_template_upload
-    template_types:
-      - classic_memes
-      - trending_templates
-      - contextual_selection
-    caption_styles:
-      - witty_humor
-      - relatable_situations
-      - tech_humor
-      - life_situations
-    processing_time: "30-60 seconds"
-
-  template_intelligence:
-    supported: true
-    selection_methods:
-      - keyword_matching
-      - contextual_analysis
-      - trend_detection
-      - sentiment_analysis
-    template_database_size: "1000+ templates"
-    auto_selection_accuracy: 85%
-
-  content_optimization:
-    supported: true
+    description: "Generates memes with AI-powered template selection and witty captions"
     features:
-      - text_positioning_optimization
-      - font_size_adjustment
-      - readability_enhancement
-      - humor_score_calculation
-    quality_metrics:
-      - readability_score
-      - humor_relevance
-      - visual_appeal
+      - "Analyzes prompt and selects suitable meme template"
+      - "Generates humorous captions with style options"
+      - "Supports trending, classic, and custom templates"
+      - "Optimizes text layout, font size, and readability"
+      - "Calculates humor and relevance scores"
+    limitations: "Requires network access to meme platforms; humor interpretation may vary"
+
+  secondary_capability:
+    supported: true
+    description: "Provides template intelligence and content optimization"
+    features:
+      - "Auto-selects templates based on keywords, context, trends, and sentiment"
+      - "Quality metrics: readability, humor relevance, visual appeal"
+      - "Processes multiple caption attempts for best output"
+      - "Retries on browser or API errors"
 
 # Requirements
 requirements:
@@ -98,7 +76,7 @@ requirements:
     - Stable internet connection
   min_memory_mb: 2048
   external_services:
-    - ImgFlip API (via browser automation)
+    - ImgFlip API
     - OpenAI API or OpenRouter API
     - Browser automation framework
 
@@ -126,62 +104,53 @@ allowed_tools:
 # Rich Documentation
 documentation:
   overview: |
-    This meme generation skill specializes in creating contextually relevant, humorous memes
-    using advanced browser automation. It intelligently selects appropriate meme templates
-    based on the input prompt, crafts witty captions, and generates high-quality memes through
-    direct interaction with meme generation platforms.
-
-    The skill excels at understanding context, selecting the perfect template, and creating
-    captions that resonate with the intended humor or message. It uses sophisticated AI to
-    analyze the prompt, match it with suitable templates, and generate memes that are both
-    visually appealing and contextually accurate.
+    Generates memes by analyzing the prompt, selecting appropriate templates, and producing witty captions.
+    Optimizes layout, readability, and humor score. Works with ImgFlip and custom templates, enabling
+    rapid creation of shareable, contextually relevant memes.
 
   use_cases:
     when_to_use:
-      - User wants to create a meme for social media
-      - User needs a humorous take on a situation
-      - User wants to express an idea through meme format
-      - User needs visual content for presentations or content
-      - User wants to create relatable humor for specific contexts
-      - User needs memes for marketing or engagement purposes
+      - "Social media humor creation"
+      - "Relatable or tech humor content"
+      - "Presentation or marketing visual humor"
+      - "Automated meme campaigns"
 
     when_not_to_use:
-      - Serious or formal content (use professional content generator)
-      - Complex data visualization (use chart/image generation agent)
-      - Original artwork creation (use art generation agent)
-      - Text-heavy content without visual elements (use text generation agent)
-      - Real-time news reporting (use news agent)
-      - Academic or technical documentation (use research agent)
+      - "Formal or academic content"
+      - "Data visualization or chart generation"
+      - "Original artwork creation"
+      - "Text-only content without visual context"
+      - "Real-time news reporting"
 
   input_structure: |
     Accepts meme generation prompts with optional specifications:
 
+    Example JSON:
     {
-      "prompt": "Description of the meme concept or situation",
+      "prompt": "Description of the meme concept",
       "style": "classic|modern|dark|tech|life|custom",
-      "template_preference": "specific_template_name_or_auto_select",
+      "template_preference": "specific_template_or_auto",
       "caption_tone": "witty|sarcastic|relatable|informative",
       "text_length": "short|medium|long",
       "target_audience": "general|tech|students|professionals"
     }
 
-    Query constraints:
+    Constraints:
     - Max prompt length: 300 characters
     - Processing time: 30-90 seconds
-    - Language: English primary, other languages with basic capability
-    - Content guidelines: Must follow platform terms of service
+    - Language: English (primary)
+    - Content guidelines: must follow platform rules
 
   output_format: |
-    Standard Meme Response:
     {
       "success": true,
       "meme": {
         "title": "Generated meme title",
         "image_url": "https://i.imgflip.com/xxxxx.jpg",
         "direct_link": "https://imgflip.com/i/xxxxx",
-        "template_used": "Drake Hotline Bling",
-        "top_text": "When you finally fix the bug",
-        "bottom_text": "But create three new ones",
+        "template_used": "Template Name",
+        "top_text": "Top caption",
+        "bottom_text": "Bottom caption",
         "humor_score": 0.87,
         "relevance_score": 0.92
       },
@@ -194,27 +163,13 @@ documentation:
       }
     }
 
-    Error Response:
-    {
-      "success": false,
-      "error": {
-        "code": "TEMPLATE_NOT_FOUND",
-        "message": "No suitable template found for the given prompt",
-        "suggestions": ["Try rephrasing your prompt", "Use a more general concept"]
-      },
-      "metadata": {
-        "processing_time_ms": 15000,
-        "templates_checked": 25
-      }
-    }
-
   error_handling:
-    - "No suitable template: Suggests alternative phrasing or broader concepts"
-    - "Caption generation fails: Attempts different humor styles or simplifies text"
-    - "Browser automation timeout: Retries with alternative template or platform"
-    - "Image processing errors: Provides template-only response or suggests manual creation"
-    - "Content policy violations: Flags inappropriate content and suggests alternatives"
-    - "Network issues: Queues requests or suggests retry after delay"
+    - "No suitable template: Suggest alternative phrasing or broader concept"
+    - "Caption generation fails: Retry different humor style"
+    - "Browser timeout: Retry alternative template/platform"
+    - "Image processing errors: Provide template-only output"
+    - "Content policy violations: Flag and suggest alternatives"
+    - "Network issues: Queue request or retry after delay"
 
   examples:
     - title: "Programming Struggle Meme"
@@ -254,20 +209,20 @@ documentation:
 
   best_practices:
     for_developers:
-      - "Use descriptive prompts that clearly convey the situation or emotion"
-      - "Specify target audience for better template selection"
-      - "Allow multiple caption attempts for optimal humor generation"
-      - "Implement proper timeout handling for browser automation"
-      - "Cache popular templates to improve response time"
-      - "Monitor platform API limits and implement rate limiting"
+      - "Use descriptive prompts for clarity"
+      - "Specify target audience for template selection"
+      - "Allow multiple caption attempts"
+      - "Handle browser automation timeouts"
+      - "Cache popular templates for faster responses"
+      - "Monitor API limits"
 
     for_orchestrators:
-      - "Route humor/entertainment requests to this agent"
-      - "Chain with content scheduling agents for social media automation"
-      - "Use humor scores to filter and rank multiple meme generations"
-      - "Implement fallback to simpler templates for time-sensitive requests"
-      - "Monitor success rates and adjust timeout settings accordingly"
-      - "Use relevance scores to ensure meme quality standards"
+      - "Route humor/entertainment requests here"
+      - "Chain with scheduling agents for social media"
+      - "Use humor scores to rank outputs"
+      - "Implement fallback for time-sensitive requests"
+      - "Monitor success rates and adjust timeout settings"
+      - "Use relevance scores to ensure quality"
 
   installation: |
     Required packages:
@@ -275,25 +230,24 @@ documentation:
 
     Environment variables:
     OPENAI_API_KEY=your_openai_api_key
-    OPENROUTER_API_KEY=your_openrouter_api_key  # Alternative to OpenAI
+    OPENROUTER_API_KEY=your_openrouter_api_key
 
     Browser setup:
-    # Install Playwright browsers
     playwright install chromium
 
     System requirements:
-    - Chrome/Chromium browser
+    - Chrome/Chromium
     - 2GB+ RAM
-    - Stable internet connection
-    - 1GB+ disk space for browser cache
+    - Stable internet
+    - 1GB+ disk space for cache
 
   versioning:
     - version: "1.0.0"
       date: "2026-02-23"
-      changes: "Initial release with ImgFlip integration and intelligent template selection"
+      changes: "Initial release with ImgFlip integration and template intelligence"
     - version: "1.1.0"
       status: "planned"
-      changes: "Add support for multiple meme platforms and custom template uploads"
+      changes: "Add multiple meme platform support and custom template uploads"
     - version: "1.2.0"
       status: "planned"
       changes: "Enhanced humor analysis and multi-language meme generation"
@@ -303,7 +257,6 @@ assessment:
   keywords:
     - meme
     - meme-generator
-    - create-meme
     - generate-meme
     - funny
     - humor
@@ -311,9 +264,7 @@ assessment:
     - caption
     - imgflip
     - social-media
-    - entertainment
     - visual-content
-    - joke
     - relatable
 
   specializations:
@@ -329,18 +280,15 @@ assessment:
   anti_patterns:
     - "serious content"
     - "formal document"
-    - "data visualization"
     - "academic paper"
     - "technical documentation"
+    - "data visualization"
     - "news reporting"
-    - "business report"
-    - "financial analysis"
 
   complexity_indicators:
     simple:
       - "quick meme"
       - "funny picture"
-      - "make me laugh"
       - "simple joke"
     medium:
       - "create meme about"
@@ -348,7 +296,7 @@ assessment:
       - "meme template"
       - "caption idea"
     complex:
-      - "intelligent meme selection"
+      - "intelligent template selection"
       - "contextually relevant humor"
       - "multi-template analysis"
       - "optimized humor generation"
