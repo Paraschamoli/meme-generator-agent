@@ -2,12 +2,12 @@
 name = "meme-generator-agent"
 version = "0.1.0"
 description = "AI Meme Generator Agent that uses browser automation to create memes based on text prompts."
-authors = [{ name = "Paras Chamoli", email = "paras25619@gmail.com" }]
+authors = [{ name = "Paras Chamoli", email = "paras@getbindu.com" }]
 readme = "README.md"
 keywords = ['python', 'agent', 'browser-use', 'meme']
 requires-python = ">=3.12,<3.13"
 dependencies = [
-    "bindu==2026.9.2.2",
+    "bindu==2026.9.4",
     "browser-use>=0.1.0",
     "langchain-openai>=0.1.0",
     "playwright>=1.40.0",
