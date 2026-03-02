@@ -5,29 +5,21 @@ author: paras@getbindu.com
 
 # Description
 description: |
-  An AI-powered skill for generating contextually relevant, humorous memes.
-  Combines browser automation with intelligent template selection to create memes
-  from text prompts, including witty captions and optimized layout. Works with
-  platforms like ImgFlip and custom templates.
+  Generates memes using browser automation on ImgFlip. Takes a text prompt,
+  searches for a meme template using action verbs from the prompt, fills in
+  top and bottom text fields, and returns a link to the generated meme.
 
 # Tags and Modes
 tags:
   - meme-generation
   - browser-automation
-  - humor
+  - imgflip
   - content-creation
-  - social-media
-  - template-selection
-  - caption-creation
-  - image-generation
 
 input_modes:
   - text/plain
-  - application/json
 
 output_modes:
-  - text/plain
-  - application/json
   - text/markdown
 
 # Example Queries
@@ -42,187 +34,136 @@ examples:
 capabilities_detail:
   primary_capability:
     supported: true
-    description: "Generates memes with AI-powered template selection and witty captions"
+    description: "Generates memes using browser automation on ImgFlip"
     features:
-      - "Analyzes prompt and selects suitable meme template"
-      - "Generates humorous captions with style options"
-      - "Supports trending, classic, and custom templates"
-      - "Optimizes text layout, font size, and readability"
-      - "Calculates humor and relevance scores"
-    limitations: "Requires network access to meme platforms; humor interpretation may vary"
+      - "Navigates to ImgFlip meme template search"
+      - "Searches for templates using action verbs extracted from user prompt"
+      - "Fills top and bottom text fields on selected template"
+      - "Generates meme and extracts image URL"
+      - "Returns markdown-formatted response with image link"
+    limitations: "Requires stable internet connection; browser automation may fail on network issues or site changes; no template scoring or optimization"
 
   secondary_capability:
-    supported: true
-    description: "Provides template intelligence and content optimization"
-    features:
-      - "Auto-selects templates based on keywords, context, trends, and sentiment"
-      - "Quality metrics: readability, humor relevance, visual appeal"
-      - "Processes multiple caption attempts for best output"
-      - "Retries on browser or API errors"
+    supported: false
+    description: "Not supported by code"
+    features: []
+    limitations: "No template intelligence, humor scoring, or multi-attempt generation"
 
 # Requirements
 requirements:
   packages:
-    - bindu==2026.9.2.2
-    - browser-use>=0.1.0
-    - langchain-openai>=0.1.0
-    - playwright>=1.40.0
-    - python-dotenv>=1.0.0
-    - requests>=2.31.0
-    - openai>=1.0.0
+    - bindu
+    - browser-use
+    - langchain-openai
+    - playwright
+    - python-dotenv
   system:
     - Chrome/Chromium browser
-    - 2GB RAM minimum
     - Stable internet connection
-  min_memory_mb: 2048
+  min_memory_mb: 512
   external_services:
-    - ImgFlip API
-    - OpenAI API or OpenRouter API
-    - Browser automation framework
+    - ImgFlip website (no API key required)
+    - OpenAI API or OpenRouter API for LLM
+    - Playwright browser automation
 
 # Performance Metrics
 performance:
-  avg_processing_time_ms: 45000
-  max_concurrent_requests: 3
-  memory_per_request_mb: 512
-  timeout_seconds: 120
-  scalability: horizontal
-  success_rate: 0.92
-  template_load_time_ms: 5000
+  avg_processing_time_ms: 60000
+  max_concurrent_requests: 1
+  memory_per_request_mb: 256
+  timeout_seconds: 180
+  scalability: limited
+  success_rate: unknown
+  template_load_time_ms: unknown
 
 # Tool Restrictions
 allowed_tools:
   - BrowserAgent
-  - Read
-  - Search
-  - Analyze
-  - Generate
-  - Click
-  - Type
-  - Screenshot
 
 # Rich Documentation
 documentation:
   overview: |
-    Generates memes by analyzing the prompt, selecting appropriate templates, and producing witty captions.
-    Optimizes layout, readability, and humor score. Works with ImgFlip and custom templates, enabling
-    rapid creation of shareable, contextually relevant memes.
+    Generates memes by automating ImgFlip website interaction. Extracts action verbs from user prompt,
+    searches for matching templates, fills text fields, and returns generated meme URL. Uses browser
+    automation with vision-enabled LLM for navigation and interaction.
 
   use_cases:
     when_to_use:
-      - "Social media humor creation"
-      - "Relatable or tech humor content"
-      - "Presentation or marketing visual humor"
-      - "Automated meme campaigns"
+      - "Simple meme generation from text prompts"
+      - "Social media content creation"
+      - "Humor content for presentations"
 
     when_not_to_use:
-      - "Formal or academic content"
-      - "Data visualization or chart generation"
-      - "Original artwork creation"
-      - "Text-only content without visual context"
-      - "Real-time news reporting"
+      - "High-volume batch meme generation"
+      - "Precise template selection requirements"
+      - "Custom template uploads"
+      - "Memes requiring specific text formatting or styling"
+      - "Time-critical generation (browser automation is slow)"
 
   input_structure: |
-    Accepts meme generation prompts with optional specifications:
+    Accepts plain text meme generation prompts.
 
-    Example JSON:
-    {
-      "prompt": "Description of the meme concept",
-      "style": "classic|modern|dark|tech|life|custom",
-      "template_preference": "specific_template_or_auto",
-      "caption_tone": "witty|sarcastic|relatable|informative",
-      "text_length": "short|medium|long",
-      "target_audience": "general|tech|students|professionals"
-    }
+    Example:
+    "Generate a meme using the 'Drake Hotline Bling' format. Top panel text: 'Writing code without testing'. Bottom panel text: 'Writing tests before deploying to production'."
 
     Constraints:
-    - Max prompt length: 300 characters
-    - Processing time: 30-90 seconds
-    - Language: English (primary)
-    - Content guidelines: must follow platform rules
+    - Input: Plain text only (no JSON structure support)
+    - Processing time: 60-180 seconds (browser automation)
+    - Language: English
+    - Template selection: Based on action verb extraction from prompt
+    - No style, tone, or formatting options
 
   output_format: |
-    {
-      "success": true,
-      "meme": {
-        "title": "Generated meme title",
-        "image_url": "https://i.imgflip.com/xxxxx.jpg",
-        "direct_link": "https://imgflip.com/i/xxxxx",
-        "template_used": "Template Name",
-        "top_text": "Top caption",
-        "bottom_text": "Bottom caption",
-        "humor_score": 0.87,
-        "relevance_score": 0.92
-      },
-      "metadata": {
-        "processing_time_ms": 45000,
-        "templates_analyzed": 15,
-        "caption_attempts": 3,
-        "platform": "imgflip",
-        "generation_timestamp": "2026-02-23T18:30:00Z"
-      }
-    }
+    Markdown-formatted text with embedded image and link:
+
+    ### Here is your meme:
+
+    ![Generated Meme](https://i.imgflip.com/xxxxx.jpg)
+
+    [View on ImgFlip](https://imgflip.com/i/xxxxx)
+
+    No JSON output. No metadata. No scoring.
 
   error_handling:
-    - "No suitable template: Suggest alternative phrasing or broader concept"
-    - "Caption generation fails: Retry different humor style"
-    - "Browser timeout: Retry alternative template/platform"
-    - "Image processing errors: Provide template-only output"
-    - "Content policy violations: Flag and suggest alternatives"
-    - "Network issues: Queue request or retry after delay"
+    - "Browser automation failure: Returns error message"
+    - "No API key: Returns initialization error"
+    - "URL extraction failure: Returns fallback message with raw result"
+    - "Network issues: Browser agent may timeout"
+    - "ImgFlip site changes: May break automation workflow"
 
   examples:
-    - title: "Programming Struggle Meme"
-      input:
-        prompt: "When your code works on your machine but not in production"
-        style: "tech"
-        caption_tone: "relatable"
-      output:
-        success: true
-        meme:
-          title: "Development vs Production Reality"
-          image_url: "https://i.imgflip.com/abc123.jpg"
-          template_used: "Confused Math Lady"
-          top_text: "Code works on my machine"
-          bottom_text: "But not in production"
-          humor_score: 0.91
-        metadata:
-          processing_time_ms: 42000
-          templates_analyzed: 12
+    - title: "Drake Hotline Bling Meme"
+      input: "Generate a meme using the 'Drake Hotline Bling' format. Top panel text: 'Writing code without testing'. Bottom panel text: 'Writing tests before deploying to production'."
+      output: |
+        ### Here is your meme:
 
-    - title: "Monday Coffee Meme"
-      input:
-        prompt: "Monday morning coffee addiction"
-        style: "life"
-        caption_tone: "witty"
-      output:
-        success: true
-        meme:
-          title: "Monday Morning Reality"
-          image_url: "https://i.imgflip.com/def456.jpg"
-          template_used: "Woman Yelling at Cat"
-          top_text: "Me before Monday morning coffee"
-          bottom_text: "Me after Monday morning coffee"
-          humor_score: 0.88
-        metadata:
-          processing_time_ms: 38000
+        ![Generated Meme](https://i.imgflip.com/albgis.jpg)
+
+        [View on ImgFlip](https://imgflip.com/i/albgis)
+
+    - title: "Distracted Boyfriend Meme"
+      input: "Generate a meme using the 'Distracted Boyfriend' format. Label the boyfriend as 'Me starting a new project', the girlfriend as 'My existing unfinished projects', and the other girl as 'A new shiny tech stack I just discovered'."
+      output: |
+        ### Here is your meme:
+
+        ![Generated Meme](https://i.imgflip.com/albh2k.jpg)
+
+        [View on ImgFlip](https://imgflip.com/i/albh2k)
 
   best_practices:
     for_developers:
-      - "Use descriptive prompts for clarity"
-      - "Specify target audience for template selection"
-      - "Allow multiple caption attempts"
-      - "Handle browser automation timeouts"
-      - "Cache popular templates for faster responses"
-      - "Monitor API limits"
+      - "Provide clear, descriptive prompts"
+      - "Include template name if specific template desired"
+      - "Expect 60-180 second processing time"
+      - "Handle browser automation failures gracefully"
+      - "Set appropriate timeout values (180s+)"
 
     for_orchestrators:
-      - "Route humor/entertainment requests here"
-      - "Chain with scheduling agents for social media"
-      - "Use humor scores to rank outputs"
-      - "Implement fallback for time-sensitive requests"
-      - "Monitor success rates and adjust timeout settings"
-      - "Use relevance scores to ensure quality"
+      - "Route simple meme generation requests here"
+      - "Do not use for batch or high-volume requests"
+      - "No template intelligence or scoring available"
+      - "Browser automation is slow and may fail"
+      - "Single concurrent request recommended"
 
   installation: |
     Required packages:
@@ -230,48 +171,35 @@ documentation:
 
     Environment variables:
     OPENAI_API_KEY=your_openai_api_key
+    or
     OPENROUTER_API_KEY=your_openrouter_api_key
+    MODEL_NAME=gpt-4o (optional, default: gpt-4o)
 
     Browser setup:
     playwright install chromium
 
-    System requirements:
-    - Chrome/Chromium
-    - 2GB+ RAM
-    - Stable internet
-    - 1GB+ disk space for cache
+    Disable telemetry (already set in code):
+    ANONYMIZED_TELEMETRY=false
+    BROWSER_USE_TELEMETRY=false
 
   versioning:
     - version: "1.0.0"
-      date: "2026-02-23"
-      changes: "Initial release with ImgFlip integration and template intelligence"
-    - version: "1.1.0"
-      status: "planned"
-      changes: "Add multiple meme platform support and custom template uploads"
-    - version: "1.2.0"
-      status: "planned"
-      changes: "Enhanced humor analysis and multi-language meme generation"
+      date: "2026-02-27"
+      changes: "Initial release with ImgFlip browser automation"
 
 # Assessment fields for skill negotiation
 assessment:
   keywords:
     - meme
-    - meme-generator
-    - generate-meme
-    - funny
-    - humor
-    - template
-    - caption
+    - generate meme
+    - create meme
     - imgflip
-    - social-media
-    - visual-content
-    - relatable
+    - funny image
+    - meme template
 
   specializations:
-    - domain: tech_humor
-      confidence_boost: 0.3
-    - domain: life_situations
-      confidence_boost: 0.3
+    - domain: meme_generation
+      confidence_boost: 0.5
     - domain: programming_memes
       confidence_boost: 0.4
     - domain: social_media_content
@@ -287,16 +215,15 @@ assessment:
 
   complexity_indicators:
     simple:
-      - "quick meme"
-      - "funny picture"
-      - "simple joke"
+      - "create meme"
+      - "generate meme"
+      - "make meme"
     medium:
-      - "create meme about"
-      - "generate meme for"
-      - "meme template"
-      - "caption idea"
+      - "meme about [topic]"
+      - "meme using [template name]"
+      - "funny meme for [context]"
     complex:
-      - "intelligent template selection"
-      - "contextually relevant humor"
-      - "multi-template analysis"
-      - "optimized humor generation"
+      - "Not supported: intelligent template selection"
+      - "Not supported: humor optimization"
+      - "Not supported: multi-template analysis"
+      - "Not supported: custom template uploads"

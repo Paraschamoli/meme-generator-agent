@@ -9,12 +9,13 @@ os.environ["BROWSER_USE_TELEMETRY"] = "false"
 import argparse
 import asyncio
 import json
+import logging
 import re
 import sys
 import traceback
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional, cast
 
 from bindu.penguin.bindufy import bindufy
 from browser_use import Agent as BrowserAgent
@@ -24,6 +25,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Global instances
+_logger = logging.getLogger(__name__)
 llm: ChatOpenAI | None = None
 _initialized = False
 _init_lock = asyncio.Lock()
@@ -40,20 +42,14 @@ class AgentResponse:
 
 def load_config() -> dict:
     """Load agent configuration from project root."""
-    possible_paths = [
-        Path(__file__).parent.parent / "agent_config.json",
-        Path(__file__).parent / "agent_config.json",
-        Path.cwd() / "agent_config.json",
-    ]
+    config_path = Path(__file__).parent / "agent_config.json"
 
-    for config_path in possible_paths:
-        if config_path.exists():
-            try:
-                with open(config_path) as f:
-                    return json.load(f)
-            except Exception as e:
-                print(f"⚠️  Error reading {config_path}: {type(e).__name__}")
-                continue
+    if config_path.exists():
+        try:
+            with open(config_path) as f:
+                return cast(dict[str, Any], json.load(f))
+        except (OSError, json.JSONDecodeError) as exc:
+            _logger.warning("Failed to load config from %s", config_path, exc_info=exc)
 
     return {
         "name": "meme-generator-agent",
